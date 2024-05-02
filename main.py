@@ -1,17 +1,17 @@
-from flask import Flask, request, jsonify
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 
-app = Flask(__name__)
+app = FastAPI()
 
-@app.route('/slack/events', methods=['POST'])
-def slack_events():
-    data = request.json
+@app.post("/slack/events")
+async def slack_events(request: Request):
+    data = await request.json()
     # Slackからのチャレンジリクエストをチェック
     if 'challenge' in data:
-        return jsonify({
-            "challenge": data['challenge']
-        })
+        return JSONResponse({"challenge": data['challenge']})
     # その他のイベント処理
-    return "Event received", 200
+    return {"message": "Event received"}
 
-if __name__ == '__main__':
-    app.run(debug=True, port=3000)
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=3000)
