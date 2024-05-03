@@ -3,7 +3,7 @@ uvicorn==0.13
 gunicorn
 slack-sdk
 requests
-sqlalchemy
+SQLAlchemy==2.0.29
 psycopg2
 pytz
 slack-bolt
