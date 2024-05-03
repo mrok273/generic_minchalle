@@ -2,16 +2,6 @@ from slack_bolt import App
 from slack_bolt.adapter.fastapi import SlackRequestHandler
 import os
 import pytz
-
-from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
-from pydantic import BaseModel
-from sqlalchemy import create_engine, Table, Column, Integer, String, MetaData, Boolean,Date
-import requests
-import re, os
-from datetime import datetime
-
-
 SLACK_BOT_TOKEN = os.environ.get("SLACK_BOT_TOKEN")
 SLACK_SIGNING_SECRET = os.environ.get("SLACK_SIGNING_SECRET")
 japan_timezone = pytz.timezone('Asia/Tokyo')
@@ -26,7 +16,13 @@ handler = SlackRequestHandler(app)
 
 
 
-
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel
+from sqlalchemy import create_engine, Table, Column, Integer, String, MetaData, Boolean,Date
+import requests
+import re, os
+from datetime import datetime
 
 
 app = FastAPI()
@@ -118,7 +114,7 @@ group by 1
     conn.commit()
     conn.close()
 
-    send_message_to_slack(team_thread_ts, message, ":thumbsup:") #絵文字使えず
+    send_message_to_slack(team_thread_ts, message, ":thumbsup:")
 
 
 def send_message_to_slack(team_thread_ts, message,icon_emoji):
