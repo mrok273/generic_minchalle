@@ -23,14 +23,22 @@ from sqlalchemy import create_engine, Table, Column, Integer, String, MetaData, 
 import requests
 import re, os
 from datetime import datetime
-
+from dotenv import dotenv_values
 
 app = FastAPI()
 
 # PostgreSQL接続設定
-DATABASE_URL = os.environ.get("DATABASE_URL")
-print(DATABASE_URL)
-engine = create_engine(DATABASE_URL, echo=True)
+# DATABASE_URL = os.environ.get("DATABASE_URL")
+# print(DATABASE_URL)
+# engine = create_engine(DATABASE_URL, echo=True)
+config = dotenv_values("./.env")
+username = config.get("DATABASE_USERNAME")
+password = config.get("DATABASE_PASSWORD")
+dbname = config.get("DATABASE_NAME")
+port = config.get("DATABASE_PORT")
+host = config.get("DATABASE_HOST")
+engine = create_engine(f"postgresql+psycopg2://{username}:{password}@{host}:{port}/{dbname}", echo=True)
+
 metadata = MetaData()
 
 # テーブル定義 (この部分はすでにあると仮定)

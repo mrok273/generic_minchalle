@@ -1,5 +1,5 @@
 fastapi==0.70.0
-uvicorn==0.13
+uvicorn
 gunicorn
 slack-sdk
 requests
@@ -7,3 +7,4 @@ SQLAlchemy==2.0.29
 psycopg2
 pytz
 slack-bolt
+python-dotenv
