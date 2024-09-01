@@ -35,7 +35,7 @@ config = dotenv_values("./.env")
 username = config.get("DATABASE_USERNAME")
 password = config.get("DATABASE_PASSWORD")
 dbname = config.get("DATABASE_NAME")
-port = config.get("DATABASE_PORT")
+port = config.get("DATABASE_PORT",6543)
 host = config.get("DATABASE_HOST")
 engine = create_engine(f"postgresql+psycopg2://{username}:{password}@{host}:{port}/{dbname}", echo=True)
 
